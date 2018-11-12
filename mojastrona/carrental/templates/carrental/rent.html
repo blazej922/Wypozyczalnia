@@ -1,0 +1,20 @@
+{% extends "carrental/index.html" %}
+{% block 'content' %}
+
+<form action="" method="post">{% csrf_token %}
+  {{ form.user.as_hidden }}
+  {{ form.car.as_hidden }}
+  {{ form.nr_doc.as_hidden }}
+  <p>Od:</p>
+  {{ form.sincew }}
+  <p>Do:</p>
+  {{ form.untilw }}
+  <p>Ilość</p>
+  {{ form.quantityrc }}
+    <input type="submit" value="Save" />
+</form>
+
+
+{% endblock %}
+
+

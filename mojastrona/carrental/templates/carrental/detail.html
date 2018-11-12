@@ -1,0 +1,45 @@
+{% extends "carrental/index.html" %}
+{% block 'content' %}
+
+<p><b>Szczegóły samochodu:</b></p>
+	<p>Marka i model: {{ cardetail.manufacturer.mark }} {{ cardetail.model }}</p>
+	<p>Rok produkcji: {{ cardetail.year_of_production }}</p>
+	<p>Przebieg: {{ cardetail.course }} km</p>
+	<p>Kolor: {{ cardetail.color }}</p>
+	<p>Silnik: {{ cardetail.engine.engine_type }} / {{ cardetail.engine.capacity }} cm3 / {{ cardetail.engine.power }} HP</p>
+	<p>Spalanie: {{ cardetail.engine.combustion }} l / 100km</p>
+	<p>Ilość: {{ cardetail.quantity }} szt</p>
+	
+	
+	</br>
+{% if cardetail.quantity > 0 %}
+<a href="{{ cardetail.get_absolute_url }}/AddToOrder">Wypożycz</a>
+{% else %}
+<p>Niestety obecnie nie posiadamy tego modelu na stanie</p>
+{% endif %}
+<a href="{{ cardetail.get_absolute_url }}/AddComment">Dodaj komentarz</a>
+
+
+<p><b>Komentarze:</b></p></br>
+{% for Comment in comments %}
+<p>Dnia {{Comment.created}} użytkownik {{ Comment.name }} napisał: </p>
+<p>{{Comment.body}}</p>
+{% endfor %}
+
+<a href="{% url 'carrental:index' %}">Strona główna</a></br></br>
+
+
+
+
+	
+
+{% endblock %}
+
+
+
+
+
+
+
+
+

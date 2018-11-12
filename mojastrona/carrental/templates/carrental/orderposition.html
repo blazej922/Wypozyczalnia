@@ -1,0 +1,12 @@
+<form action="" method="post">{% csrf_token %}
+	{{ car.manufacturer }}
+	{{ car.model }}
+	{{ form.user.as_hidden }}
+    {{ form.car.as_hidden }}
+    {{ form.quantityrc }}
+    {{ form.sincew }}
+    {{ form.untilw }}
+    {{ form.piosum.as_hidden }}
+    <p>{{ car.price }} zł / 1 dzień</p>
+    <input type="submit" value="Dodaj" />
+</form>

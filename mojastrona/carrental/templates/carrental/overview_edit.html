@@ -1,0 +1,10 @@
+{% extends "carrental/index.html" %}
+
+{% block 'content' %}
+
+<form action="" method="POST">{% csrf_token %}
+  Data: <input type="date"  name="new_date"><br>
+  <input type="submit" value="Zaktualizuj">
+</form> 
+
+{% endblock %}

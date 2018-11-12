@@ -1,0 +1,15 @@
+{% extends "carrental/index.html" %}
+{% block 'content' %}
+
+<a href="{% url 'carrental:index' %}">Strona główna</a></br></br>
+
+
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    
+    <input type="submit" value="Save" />
+</form>
+	
+{% endblock %}
+
+

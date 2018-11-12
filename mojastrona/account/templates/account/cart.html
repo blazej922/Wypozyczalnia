@@ -1,0 +1,32 @@
+	{% extends "carrental/index.html" %}
+
+	{% block 'content' %}
+		
+		</br><p>W tej chwili posiadasz następujące pozycje w koszyku:</p></br>
+
+	 	<table style="width:100%">
+  		<tr>
+    		<th>Marka</th>
+    		<th>Model</th>
+    		<th>Od</th>
+    		<th>Do</th>
+    		<th>Cena</th>
+  		</tr>
+  		{% for document in documents %}
+  		<tr>
+    		<td>{{document.car.manufacturer}}</td>
+    		<td>{{document.car.model}}</td>
+    		<td>{{document.sincew}}</td>
+    		<td>{{document.untilw}}</td>
+    		<td>{{document.piosum}}</td>
+  		</tr>
+  		{% endfor %}
+  		<tr>
+    		<th>Cena całkowita: {{total}}</th>
+  		</tr>
+		</table> 
+		
+	{% endblock %}
+</body>
+
+</html>

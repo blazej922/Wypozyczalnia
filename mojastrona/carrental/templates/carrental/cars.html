@@ -1,0 +1,11 @@
+{% extends "carrental/index.html" %}
+{% block 'content' %}
+<a href="{% url 'carrental:index' %}">Strona główna</a></br></br>
+
+	{% for Car in cars %}
+	<a href="{{ Car.get_absolute_url }}">{{ Car.manufacturer.mark }} {{ Car.model }}</a></br>
+	{% endfor %}
+
+{% endblock %}
+
+

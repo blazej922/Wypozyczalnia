@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+	{% extends "carrental/index.html" %}
+	{% block 'content' %}
+	
+	{% if request.user.first_name == None %}
+  </br>
+	<p style="font-size: 20px;">Witaj {{ request.user.username }}!</p>
+	{% else %}
+  </br>
+	<p style="font-size: 20px;"><b>Witaj {{ request.user.first_name }}!</b></p>
+	{% endif %}
+	<p style="font-size: 20px;">Należysz do grupy: {{group}} </p>
+
+  {% if 'customer' in group %}
+
+  <a href="{% url 'account:cart' %}">Koszyk</a>
+
+  {% endif %}
+
+
+	</br>
+
+  {% if 'serviceman' in group %}
+
+    <p><b>Usterki</b></p>
+  <table style="width:100%">
+    <tr>
+      <th align="left">Użytkownik</br> zgłaszający</th>
+      <th align="left">Samochód</th>
+      <th align="left">Treść</th>
+      <th align="left">Status</th>
+      <th align="left">Opublikowano</th>
+      <th align="left">Komentarze</th>
+      <th></th>
+      <th></th>
+    </tr>
+    {% for x, y in faults_dictio.items %}
+    <tr>
+      <td>{{x.user}}</td>
+      <td>{{x.car.model}} {{x.car.reg_number}}</td>
+      <td>{{ x.body }}</td>
+      <td>{{x.status}}</td>
+      <td>{{x.created|date}}</td>
+      <td>  {% for comment in y %}
+              {{comment.body}}
+              </br>
+            {% endfor %}
+      </td>
+      <td><a href="{{ x.get_absolute_url }}"> Edytuj </a></td>
+      <td><a href="/account/addcfault/{{x.car.id}}"> Dodaj komentarz </a></td>
+      </tr> 
+    {% endfor %}
+  </table>
+
+	</br></br></br>
+
+	   <p><b>Przeglądy:</b></p>
+      {% if dictio|length > 0 %}
+	     <table style="width:80%">
+  	   <tr>
+    	   <th>Samochód</th>
+    	   <th>Ważność przeglądu upływa za...</th>
+  	   </tr>
+  	{% for key, value in dictio.items %}
+  	   <tr>
+    	   <td>{{key.car.manufacturer}} {{key.car.model}} {{key.car.reg_number}}</td>
+    	   <td>{{value}} dni/dzień</td>
+         <td><a href="{{key.car.get_absolute_url}}/OverviewEdit">Edytuj</a></td>
+  	   </tr>
+  	{% endfor %}
+	     </table> 
+  {% endif %}
+
+
+  {% if dictio|length == 0 %}
+  <p> W tym momencie nie ma samochodów w których upływa termin ważności przeglądu </p>
+  {% endif %}
+
+	</br></br></br>
+
+<p><b>Ubezpieczenie:</b></p>
+{{dictios}}
+{% if dictioisu|length > 0 %}
+	 <table style="width:80%">
+  	 <tr>
+    	   <th>Samochód</th>
+    	   <th>Ubezpieczenie wygaśnie za...</th>
+  	 </tr>
+  	 {% for key, value in dictioisu.items %}
+  	 <tr>
+    	   <td>{{key.car.manufacturer}} {{key.car.model}} {{key.car.reg_number}}</td>
+    	   <td>{{value}} dni/dzień</td>  
+         <td><a href="{{key.car.get_absolute_url}}/InsurenceEdit">Edytuj</a></td>
+  	 </tr>
+  	{% endfor %}
+	 </table>
+{% endif %}
+{% if dictioisu|length == 0 %}
+    <p>W tym momencie nie ma samochodów w których ubezpiecznie dobiega końca</p> 
+{% endif %}
+{% endif %}
+	
+{% endblock %}
+</body>
+
+</html>

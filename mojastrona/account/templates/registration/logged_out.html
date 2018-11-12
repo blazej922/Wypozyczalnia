@@ -1,0 +1,8 @@
+{% extends "carrental/index.html" %}
+
+{% block 'content' %}
+
+<h1>Wylogowywanie</h1>
+<p>Zostałeś pomyślnie wylogowany. Możesz <a href="{% url 'account:login' %}">zalogować</a> się ponownie lub przejść do <a href="{% url 'carrental:index' %}">strony głównej</a></p>
+
+{% endblock %}
