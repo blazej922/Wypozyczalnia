@@ -1,3 +1,3 @@
-#Wypozyczalnia
+Wypozyczalnia
 
 It is not finished car rental project. 
